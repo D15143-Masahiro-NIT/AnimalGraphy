@@ -1,0 +1,38 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0.23
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TZ: Asia/Tokyo
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./containers/mysql/conf.d:/etc/mysql/conf.d
+      - mysql_data:/var/lib/mysql
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      TZ: Asia/Tokyo
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/AnimalGraphy
+      - public_data:/AnimalGraphy/public
+      - log_data:/AnimalGraphy/log
+      - tmp_data:/AnimalGraphy/tmp
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+volumes:
+  mysql_data:
+  public_data:
+  log_data:
+  tmp_data:
