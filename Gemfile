@@ -43,6 +43,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
 
   gem 'rails-flog', require: 'flog'
+
+  gem 'faker'
 end
 
 group :development do
