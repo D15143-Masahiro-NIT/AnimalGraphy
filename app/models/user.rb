@@ -20,6 +20,7 @@
 #
 class User < ApplicationRecord
   validates :name, presence: true, length: { in: 1..64 }
+  mount_uploader :image, ImagesUploader
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
