@@ -9,4 +9,17 @@
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    .main-menu.navbar.navbar-expand-lg
+      .mr-auto
+        = link_to('AnimalGraphy', root_path, class: 'navbar-brand app-title main-menu-item')
+      .ul.navbar-nav
+        - if user_signed_in?
+          .li.nav-item.nav-link
+            = link_to("アカウント : #{current_user.name}", "/users/#{current_user.id}", class: 'main-menu-item')
+          .li.nav-item.nav-link
+            = link_to('ログアウト', destroy_user_session_path, class: 'main-menu-item', method: :delete)
+        - else
+          .li.nav-item.nav-link
+            = link_to('ログイン', new_user_session_path, class: 'main-menu-item')
+    .container
+      = yield
