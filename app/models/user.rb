@@ -33,4 +33,8 @@ class User < ApplicationRecord
       user.password = SecureRandom.alphanumeric(32)
     end
   end
+
+  def guest?
+    email == 'guest@example.com'
+  end
 end
