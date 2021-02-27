@@ -17,4 +17,6 @@
             = f.label :remember_me
         .actions
           = f.submit "Log in"
+      = link_to('ゲストユーザーでログイン', users_sign_in_with_guest_path, method: :post)
+      %br/
       = render "devise/shared/links"

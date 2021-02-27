@@ -26,4 +26,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def self.create_guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.name = 'Guest'
+      user.password = SecureRandom.alphanumeric(32)
+    end
+  end
 end
