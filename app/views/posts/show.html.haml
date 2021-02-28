@@ -1,0 +1,13 @@
+.d-flex.justify-content-center.mt-5
+  .card
+    .card-body
+      %a.d-flex.align-items-center{ href: "/users/#{@post.user_id}" }
+        .user-image
+          = image_tag(@post.user.image.thumb.url, class: 'rounded float-left', loading: 'lazy')
+        %p.font-weight-bold.text-body.m-0
+          = @post.user.name
+      = image_tag(@post.image.url, class: 'rounded float-left', loading: 'lazy')
+      %p
+        = @post.comment
+      - if user_signed_in? && @post.user_id == current_user.id
+        = link_to('編集', edit_post_path)
